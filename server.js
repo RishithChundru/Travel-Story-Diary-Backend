@@ -15,6 +15,26 @@ connectDB();
 
 const app = express();
 
+const allowedOrigins = [
+    process.env.FRONTEND_URL_VERCEL,
+    'http://localhost:3000', 
+    'http://localhost:5173'  
+];
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            console.log('Blocked by CORS for origin:', origin); 
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true, 
+    optionsSuccessStatus: 200 
+};
+app.use(cors(corsOptions));
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
