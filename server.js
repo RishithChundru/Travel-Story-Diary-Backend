@@ -17,11 +17,7 @@ const app = express();
 
 app.use(cors())
 
-const allowedOrigins = [
-    process.env.FRONTEND_URL_VERCEL,
-    'http://localhost:3000', 
-    'http://localhost:5173'  
-];
+const allowedOrigins = ['https://travel-story-diary-frontend.vercel.app'];
 
 
 const corsOptions = {
